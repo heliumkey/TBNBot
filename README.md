@@ -11,3 +11,7 @@ Features:
 Todo:   
 * Better config file format  
 * chess - web and irc interface 
+
+- - - -
+
+Licensed under GPL v3 for compatibility with the PircBotX license.
