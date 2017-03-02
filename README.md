@@ -9,6 +9,7 @@ Features:
 * Chat utilities
 
 Todo:   
+* Actually utilize slf4j for logging
 * Better config file format  
 * chess - web and irc interface
 
