@@ -90,12 +90,16 @@ public class kBotX {
 
         chanlist = defaultProp.getProperty("channels");
         channels = new ArrayList<String>(Arrays.asList(chanlist.substring(0, chanlist.length()).split(", ")));
+        wolframKey = defaultProp.getProperty("apikey");
         nick = defaultProp.getProperty("nick");
         ssl = Boolean.getBoolean(defaultProp.getProperty("ssl"));
         server = defaultProp.getProperty("server");
         port =  Integer.parseInt(defaultProp.getProperty("port"));
         System.out.println(channels);
         wolf = new WolfQuery(wolframKey);
+        System.out.println(wolframKey);
+        System.out.println(wolf.toString());
+
 
 
 

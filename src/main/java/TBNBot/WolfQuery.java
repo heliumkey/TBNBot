@@ -8,15 +8,13 @@ import java.util.List;
 
 public class WolfQuery {
 
-    static String wolframKey;
+    static String wolframKeyInternal;
 
     WolfQuery(String w){
-        wolframKey = w;
+        wolframKeyInternal = w;
 
     }
 
-    // PUT YOUR APPID HERE:
-    private static String appid = wolframKey;
 
     public static List query(String input) {
 
@@ -33,7 +31,7 @@ public class WolfQuery {
         WAEngine engine = new WAEngine();
 
         // These properties will be set in all the WAQuery objects created from this WAEngine.
-        engine.setAppID(appid);
+        engine.setAppID(wolframKeyInternal);
         engine.addFormat("plaintext");
 
         // Create the query.
@@ -57,7 +55,7 @@ public class WolfQuery {
                 System.out.println("Query error");
                 System.out.println("  error code: " + queryResult.getErrorCode());
                 System.out.println("  error message: " + queryResult.getErrorMessage());
-                System.out.println(appid);
+                System.out.println(wolframKeyInternal);
             } else if (!queryResult.isSuccess()) {
                 System.out.println("Query was not understood; no results available.");
             } else {

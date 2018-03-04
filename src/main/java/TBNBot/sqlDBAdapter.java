@@ -76,14 +76,14 @@ public class sqlDBAdapter {
 
     public void insertSeen(String userName, String channelName, String seenDate) throws SQLException {
 
-        int searchIndex = searchSeen(userName, channelName);
+        int searchIndex = searchSeen(userName.toLowerCase(), channelName);
 
         if(searchIndex == 0){
             String statement = "INSERT INTO seenTable(user_name, channel_name, last_seen_date) VALUES(?,?,?)";
 
             PreparedStatement pstatement = this.connection.prepareStatement(statement);
 
-            pstatement.setString(1, userName);
+            pstatement.setString(1, userName.toLowerCase());
             pstatement.setString(2, channelName);
             pstatement.setString(3, seenDate);
 
@@ -98,7 +98,7 @@ public class sqlDBAdapter {
 
             PreparedStatement pstatement = this.connection.prepareStatement(sqlUpdateStr);
 
-            pstatement.setString(1, userName);
+            pstatement.setString(1, userName.toLowerCase());
             pstatement.setString(2, channelName);
             pstatement.setString(3, seenDate);
             pstatement.setInt(4, searchIndex);
@@ -130,7 +130,7 @@ public class sqlDBAdapter {
         String dateSelect = "SELECT last_seen_date FROM seenTable where user_name = ? AND channel_name = ?";
         PreparedStatement pstatement = this.connection.prepareStatement(dateSelect);
 
-        pstatement.setString(1, username);
+        pstatement.setString(1, username.toLowerCase());
         pstatement.setString(2, channel);
 
         ResultSet rs = pstatement.executeQuery();
