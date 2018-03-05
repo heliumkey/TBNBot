@@ -1,6 +1,7 @@
 package TBNBot;
 
 import org.pircbotx.User;
+import org.pircbotx.UserLevel;
 import org.pircbotx.hooks.ListenerAdapter;
 import org.pircbotx.hooks.events.JoinEvent;
 import org.pircbotx.hooks.events.MessageEvent;
@@ -95,7 +96,7 @@ public class kBotXListener extends ListenerAdapter {
             e.getBot().sendIRC().message(e.getUser().getNick(), "!ws <index> <query>: Select a Wolfram Alpha entry");
             e.getBot().sendIRC().message(e.getUser().getNick(), "!seen <nick>: Display time since user last seen");
             e.getBot().sendIRC().message(e.getUser().getNick(), "!weather <location>: Display weather");
-            e.getBot().sendIRC().message(e.getUser().getNick(), "!foghorn <message>: Announce a message to all nicks in channel");
+            e.getBot().sendIRC().message(e.getUser().getNick(), "!foghorn <message>: Announce a message to all nicks in channel (channel ops only)");
 
 
         }
@@ -133,7 +134,7 @@ public class kBotXListener extends ListenerAdapter {
             }
 
         }
-        if(e.getMessage().startsWith("!foghorn")){
+        if(e.getMessage().startsWith("!foghorn") && e.getUser().getUserLevels(e.getChannel()).contains(UserLevel.OP)){
 
             String entry = new String();
 
