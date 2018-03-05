@@ -28,6 +28,7 @@ public class kBotX {
     static Scanner scan = new Scanner(System.in);
 
     static String wolframKey;
+    static String ytkey;
 
     static String versionString = "TBNBot v0.1";
 
@@ -81,6 +82,11 @@ public class kBotX {
 
             defaultProp.setProperty("apikey", wolframKey);
 
+            System.out.println();
+            System.out.println("YouTube API key: ");
+            ytkey = scan.next();
+            defaultProp.setProperty("ytkey", ytkey);
+
 
             FileOutputStream out = new FileOutputStream("defaultProperties");
             defaultProp.store(out, "Configuration");
@@ -98,7 +104,8 @@ public class kBotX {
         System.out.println(channels);
         wolf = new WolfQuery(wolframKey);
         System.out.println(wolframKey);
-        System.out.println(wolf.toString());
+        ytkey = defaultProp.getProperty("ytkey");
+
 
 
 
@@ -112,7 +119,7 @@ public class kBotX {
                 .addServer(server, port)
                 .addAutoJoinChannels(channels)
                 .setSocketFactory(new UtilSSLSocketFactory().trustAllCertificates())
-                .addListener(new kBotXListener(detector, wolf, sqlConnection))
+                .addListener(new kBotXListener(detector, wolf, sqlConnection, ytkey))
                 .setEncoding(Charset.forName("UTF-8"))
                 .buildConfiguration();
 

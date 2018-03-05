@@ -1,5 +1,6 @@
 package TBNBot;
 
+
 import org.pircbotx.User;
 import org.pircbotx.UserLevel;
 import org.pircbotx.hooks.ListenerAdapter;
@@ -17,13 +18,17 @@ public class kBotXListener extends ListenerAdapter {
     URLDetect detector;
     WolfQuery wQuery;
     sqlDBAdapter sqlAdapter;
+    YTSearch ytsearch;
+    String ytkey;
 
 
 
-    kBotXListener(URLDetect d, WolfQuery q, sqlDBAdapter s){
+    kBotXListener(URLDetect d, WolfQuery q, sqlDBAdapter s, String ykey){
         detector = d;
         wQuery = q;
         sqlAdapter = s;
+        ytkey = ykey;
+
     }
 
     @Override
@@ -67,7 +72,6 @@ public class kBotXListener extends ListenerAdapter {
 
             }
 
-
         }
         if(e.getMessage().startsWith("!q")){
 
@@ -97,6 +101,7 @@ public class kBotXListener extends ListenerAdapter {
             e.getBot().sendIRC().message(e.getUser().getNick(), "!seen <nick>: Display time since user last seen");
             e.getBot().sendIRC().message(e.getUser().getNick(), "!weather <location>: Display weather");
             e.getBot().sendIRC().message(e.getUser().getNick(), "!foghorn <message>: Announce a message to all nicks in channel (channel ops only)");
+            e.getBot().sendIRC().message(e.getUser().getNick(), "!y <query>: Display first YouTube search result");
 
 
         }
@@ -161,6 +166,19 @@ public class kBotXListener extends ListenerAdapter {
 
             }
             e.getBot().sendIRC().message(e.getChannel().getName(), entry);
+        }
+
+        if(e.getMessage().startsWith("!y")){
+            System.out.println("yt!");
+
+            String ytquery = e.getMessage().substring(3);
+
+            ytsearch = new YTSearch(ytkey);
+            String ytresult = ytsearch.search(ytquery);
+
+            e.getBot().sendIRC().message(e.getChannel().getName(), ytresult);
+
+
         }
 
     }
