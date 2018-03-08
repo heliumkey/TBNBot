@@ -110,6 +110,7 @@ public class kBotX {
 
 
 
+
         @SuppressWarnings("unchecked")
         Configuration configuration = new Configuration.Builder()
                 .setName(nick)

@@ -168,15 +168,18 @@ public class kBotXListener extends ListenerAdapter {
             e.getBot().sendIRC().message(e.getChannel().getName(), entry);
         }
 
-        if(e.getMessage().startsWith("!y")){
+        if(e.getMessage().startsWith("!yt")){
             System.out.println("yt!");
 
             String ytquery = e.getMessage().substring(3);
+            if(!ytquery.isEmpty()){
+                ytsearch = new YTSearch(ytkey);
+                String ytresult = ytsearch.search(ytquery);
 
-            ytsearch = new YTSearch(ytkey);
-            String ytresult = ytsearch.search(ytquery);
+                e.getBot().sendIRC().message(e.getChannel().getName(), ytresult);
+            }
 
-            e.getBot().sendIRC().message(e.getChannel().getName(), ytresult);
+
 
 
         }
